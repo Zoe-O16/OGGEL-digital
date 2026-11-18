@@ -1,4 +1,5 @@
 import SiteInteractions from './SiteInteractions';
+import ContactForm from './ContactForm';
 
 export default function Page() {
   return (
@@ -75,42 +76,7 @@ export default function Page() {
           <h2 data-reveal data-delay="1"><span>Need something?</span></h2>
           <p data-reveal data-delay="2" style={{ maxWidth: "54ch", margin: "0 auto", fontSize: "18px", lineHeight: "1.5", color: "var(--ink-2)" }}>Share a few details about your project and what you&rsquo;d like to achieve. I&rsquo;ll review your message personally and respond within two working days.</p>
       
-          <form className="form" id="form" data-reveal data-delay="3" noValidate>
-            <div className="field">
-              <label htmlFor="name">Your name</label>
-              <input id="name" name="name" type="text" autoComplete="name" placeholder="Jane Doe" />
-              <div className="err" data-err="name"></div>
-            </div>
-            <div className="field">
-              <label htmlFor="email">Email</label>
-              <input id="email" name="email" type="email" autoComplete="email" placeholder="jane@studio.com" />
-              <div className="err" data-err="email"></div>
-            </div>
-            <div className="field full">
-              <label htmlFor="kind">Project type</label>
-              <select id="kind" name="kind">
-                <option value="brand">Brand &amp; website</option>
-                <option value="editorial">Editorial site</option>
-                <option value="ecom">E-commerce</option>
-                <option value="product">Product / app</option>
-                <option value="retainer">Studio retainer</option>
-                <option value="other">Something else</option>
-              </select>
-              <div className="err" data-err="kind"></div>
-            </div>
-            <div className="field full">
-              <label htmlFor="msg">Tell me about it</label>
-              <textarea id="msg" name="msg" placeholder="A paragraph is plenty. Links, decks, and napkins also welcome."></textarea>
-              <div className="err" data-err="msg"></div>
-            </div>
-            <div className="submit">
-              <label className="attach" data-hover><input type="file" id="files" name="files" multiple accept=".pdf,.doc,.docx,.key,.ppt,.pptx,.png,.jpg,.jpeg,.zip" /><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M21 11.5 12.5 20a5 5 0 0 1-7-7l8.5-8.5a3.5 3.5 0 0 1 5 5L10.5 18a2 2 0 0 1-3-3l7.5-7.5"/></svg><span>Attach files</span><span className="files" id="file-names"></span></label>
-              <button type="submit" className="send-btn" data-hover>
-                <span>Send brief</span>
-                <svg className="arr" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M5 12h14m-6-6 6 6-6 6"/></svg>
-              </button>
-            </div>
-          </form>
+          <ContactForm />
         </div>
       </section>
       

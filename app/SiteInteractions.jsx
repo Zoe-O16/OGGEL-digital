@@ -167,40 +167,7 @@ export default function SiteInteractions() {
       }
     
       /* ---------- Form ---------- */
-      const ERR = {
-        en: { name: 'Please add your name.', email: 'Looks like that email’s off.', msg: 'Tell me a little more.' },
-        nl: { name: 'Vul je naam in.', email: 'Dat e‑mailadres lijkt niet te kloppen.', msg: 'Vertel iets meer.' }
-      };
-      const THANKS = {
-        en: (n) => ({ head: `Thanks, ${n} — got it.`, body: 'I&rsquo;ll be in touch within two working days. Expect a reply from Jonas, not a bot.' }),
-        nl: (n) => ({ head: `Bedankt, ${n} — ik heb &rsquo;m.`, body: 'Je hoort binnen twee werkdagen van me. Geen bot — gewoon Jonas.' })
-      };
-      const form = document.getElementById('form');
-      const fileIn = document.getElementById('files');
-      if (fileIn) fileIn.addEventListener('change', ()=>{
-        const fs=[...fileIn.files];
-        document.getElementById('file-names').textContent = fs.length>1 ? `${fs.length} files` : (fs[0]?.name||'');
-        fileIn.closest('.attach').classList.toggle('has', fs.length>0);
-      });
-      if (form){
-        form.addEventListener('submit', e=>{
-          e.preventDefault();
-          const data = Object.fromEntries(new FormData(form));
-          let ok = true;
-          const t = ERR[LANG] || ERR.en;
-          form.querySelectorAll('.err').forEach(el=>el.textContent='');
-          if(!data.name || data.name.trim().length<2){ form.querySelector('[data-err="name"]').textContent = t.name; ok=false; }
-          if(!data.email || !/^\S+@\S+\.\S+$/.test(data.email)){ form.querySelector('[data-err="email"]').textContent = t.email; ok=false; }
-          if(!data.msg || data.msg.trim().length<10){ form.querySelector('[data-err="msg"]').textContent = t.msg; ok=false; }
-          if(!ok) return;
-          const k = (THANKS[LANG] || THANKS.en)(data.name.split(' ')[0]);
-          const ok2 = document.createElement('div');
-          ok2.className='ok';
-          ok2.innerHTML = `<div class="dot"></div><div><div style="font-weight:500;margin-bottom:4px">${k.head}</div><div style="opacity:.6;font-size:14px">${k.body}</div></div>`;
-          form.innerHTML = '';
-          form.appendChild(ok2);
-        });
-      }
+      /* Handled by ContactForm.jsx (React + Resend server action). */
     
       /* ---------- Clock ---------- */
       function fmt(){
