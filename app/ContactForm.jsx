@@ -32,6 +32,10 @@ const MAX_FILES = 5;
 const MAX_TOTAL_BYTES = 4 * 1024 * 1024;
 
 // Visually hidden but still in the DOM, so bots fill it in and people never see it.
+// Messages in ink, not the accent: the accent disappears on the lime glow behind the form.
+const msgStyle = { color: 'var(--ink)' };
+const alertStyle = { gridColumn: '1 / -1', color: 'var(--ink)', fontSize: 13, textTransform: 'none', letterSpacing: 0, fontFamily: 'inherit' };
+
 const honeypotStyle = { position: 'absolute', left: '-10000px', top: 'auto', width: '1px', height: '1px', overflow: 'hidden' };
 
 function validate(fd) {
@@ -98,12 +102,12 @@ export default function ContactForm() {
       <div className="field">
         <label htmlFor="name">Your name</label>
         <input id="name" name="name" type="text" autoComplete="name" placeholder="Jane Doe" maxLength={120} aria-invalid={!!errors.name} />
-        <div className="err" data-err="name">{errors.name ? t.name : ''}</div>
+        <div className="err" data-err="name" style={msgStyle}>{errors.name ? t.name : ''}</div>
       </div>
       <div className="field">
         <label htmlFor="email">Email</label>
         <input id="email" name="email" type="email" autoComplete="email" placeholder="jane@studio.com" maxLength={200} aria-invalid={!!errors.email} />
-        <div className="err" data-err="email">{errors.email ? t.email : ''}</div>
+        <div className="err" data-err="email" style={msgStyle}>{errors.email ? t.email : ''}</div>
       </div>
       <div className="field full">
         <label htmlFor="kind">Project type</label>
@@ -115,12 +119,12 @@ export default function ContactForm() {
           <option value="retainer">Studio retainer</option>
           <option value="other">Something else</option>
         </select>
-        <div className="err" data-err="kind"></div>
+        <div className="err" data-err="kind" style={msgStyle}></div>
       </div>
       <div className="field full">
         <label htmlFor="msg">Tell me about it</label>
         <textarea id="msg" name="msg" maxLength={5000} placeholder="A paragraph is plenty. Links, decks, and napkins also welcome." aria-invalid={!!errors.msg}></textarea>
-        <div className="err" data-err="msg">{errors.msg ? t.msg : ''}</div>
+        <div className="err" data-err="msg" style={msgStyle}>{errors.msg ? t.msg : ''}</div>
       </div>
       <div style={honeypotStyle} aria-hidden="true">
         <label htmlFor="company_website">Leave this field empty</label>
@@ -138,9 +142,9 @@ export default function ContactForm() {
           <svg className="arr" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M5 12h14m-6-6 6 6-6 6"/></svg>
         </button>
       </div>
-      {errors.files ? <div className="err" style={{ gridColumn: '1 / -1' }}>{t.files}</div> : null}
+      {errors.files ? <div className="err" role="alert" style={alertStyle}>{t.files}</div> : null}
       {state.status === 'error' && !pending ? (
-        <div className="err" role="alert" style={{ gridColumn: '1 / -1' }}>{t.error}</div>
+        <div className="err" role="alert" style={alertStyle}>{t.error}</div>
       ) : null}
     </form>
   );
