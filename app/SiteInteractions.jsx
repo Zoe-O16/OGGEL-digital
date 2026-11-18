@@ -95,6 +95,23 @@ export default function SiteInteractions() {
       }
       centerBlobOnCta();
       topBlobAboveAccent();
+      /* Contact circle on tablet & phone: same shape and placement as desktop.
+         Its blurred top sits behind "Need something?" and the footer cuts off the bottom ~30%. */
+      function placeCtaCircle(){
+        const blob=document.querySelector('.cta-section .b-cta'), sec=document.querySelector('.cta-section'), h2=sec&&sec.querySelector('h2');
+        if(!blob||!sec||!h2) return;
+        if(!window.matchMedia('(max-width:1024px)').matches){ ['width','height','top'].forEach(k=>blob.style[k]=''); return; }
+        const shift=new DOMMatrix(getComputedStyle(h2).transform).m42; /* ignore the reveal slide-in */
+        const hr=h2.getBoundingClientRect(), sr=sec.getBoundingClientRect();
+        const top=hr.top-shift-sr.top + hr.height*1.44;   /* same offset below the heading as on desktop */
+        const d=(sr.height-top)/0.70;                      /* bottom 30% hidden behind the footer */
+        blob.style.width=d+'px'; blob.style.height=d+'px'; blob.style.top=(top+d/2)+'px';
+      }
+      placeCtaCircle();
+      window.addEventListener('resize', placeCtaCircle);
+      window.addEventListener('load', placeCtaCircle);
+      document.fonts && document.fonts.ready.then(placeCtaCircle);
+      { const h=document.querySelector('.cta-section h2'); h && h.addEventListener('transitionend', placeCtaCircle); }
       window.addEventListener('resize', topBlobAboveAccent);
       window.addEventListener('load', topBlobAboveAccent);
       document.fonts && document.fonts.ready.then(topBlobAboveAccent);

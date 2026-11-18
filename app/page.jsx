@@ -48,24 +48,21 @@ export default function Page() {
           </div>
         </div>
       
-        <div className="grid-work" id="grid-work" data-layout="big-right">
-          <a className="case c-big" data-hover data-reveal>
-            <img className="case-img" src="/images/thesis.jpg" alt="Thesis" loading="lazy" />
-            <div className="corner">01</div>
-            <div className="label"><span className="t">Thesis</span></div>
-            <div className="reveal"><span className="t">View project</span><svg className="arr" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></div>
+        <div className="grid-projects" id="grid-work">
+          <a className="proj" href="https://www.lilyvanleeuwen.com" target="_blank" rel="noopener noreferrer" data-hover data-reveal>
+            <span className="proj-cat">Portfolio</span>
+            <span className="proj-title">Lily van Leeuwen</span>
+            <span className="proj-url"><span className="u">lilyvanleeuwen.com</span><svg className="arr" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M7 17 17 7M9 7h8v8"/></svg></span>
           </a>
-          <a className="case c-sm" data-hover data-reveal>
-            <img className="case-img" src="/images/housing.jpg" alt="Housing website" loading="lazy" />
-            <div className="corner">02</div>
-            <div className="label"><span className="t">Housing website</span></div>
-            <div className="reveal"><span className="t">View project</span><svg className="arr" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></div>
+          <a className="proj" href="https://sophiahuis.vercel.app/" target="_blank" rel="noopener noreferrer" data-hover data-reveal>
+            <span className="proj-cat">Guide</span>
+            <span className="proj-title">Amsterdam housing guide</span>
+            <span className="proj-url"><span className="u">sophiahuis.vercel.app</span><svg className="arr" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M7 17 17 7M9 7h8v8"/></svg></span>
           </a>
-          <a className="case c-sm" data-hover data-reveal>
-            <img className="case-img" src="/images/lily.jpg" alt="Lily’s website" loading="lazy" />
-            <div className="corner">03</div>
-            <div className="label"><span className="t">Lily&rsquo;s website</span></div>
-            <div className="reveal"><span className="t">View project</span><svg className="arr" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></div>
+          <a className="proj" href="https://www.fmn-thesis.nl" target="_blank" rel="noopener noreferrer" data-hover data-reveal>
+            <span className="proj-cat">Thesis</span>
+            <span className="proj-title">Metanarratives in the Fashion Domain</span>
+            <span className="proj-url"><span className="u">fmn-thesis.nl</span><svg className="arr" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M7 17 17 7M9 7h8v8"/></svg></span>
           </a>
         </div>
       </section>
@@ -74,7 +71,7 @@ export default function Page() {
         <div className="b-cta" aria-hidden="true"></div>
         <div className="inner">
           <h2 data-reveal data-delay="1"><span>Need something?</span></h2>
-          <p data-reveal data-delay="2" style={{ maxWidth: "54ch", margin: "0 auto", fontSize: "18px", lineHeight: "1.5", color: "var(--ink-2)" }}>Share a few details about your project and what you&rsquo;d like to achieve. I&rsquo;ll review your message personally and respond within two working days.</p>
+          <p data-reveal data-delay="2" style={{ maxWidth: "54ch", margin: "0 auto", fontSize: "18px", lineHeight: "1.5", color: "var(--ink-2)" }}>Share a few details about your project and what you&rsquo;d like to achieve. I&rsquo;ll review your message personally.</p>
       
           <ContactForm />
         </div>
