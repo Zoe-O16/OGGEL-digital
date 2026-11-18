@@ -4,7 +4,7 @@
   --ink-2:#1a1a18;
   --muted:#6b6b66;
   --line:#d9d6cd;
-  --accent:#C7F464;
+  --accent:#B6EA3E;
   --accent-ink:#0E0E0C;
   --blob-opacity:1;
   --blob-blur:102px;
@@ -372,3 +372,12 @@ html{-webkit-text-size-adjust:100%}
 
 /* ---------- Selection ---------- */
 ::selection{background:var(--accent);color:var(--ink)}
+/* ---------- Hero blobs on phone & tablet: one half circle from the top, clear of the accent word ---------- */
+@media (max-width:1024px){
+  .hero .b-4{display:none}
+  .hero .b-1,body[data-heroblobs] .hero .b-1{display:block;left:50%;width:140vw;margin-left:-70vw;--blob-blur:56px;border-radius:0 0 50% 50% / 0 0 100% 100%;animation:none}
+  /* "solutions" on its own line below "digital" */
+  .hero h1 .am{display:block}
+  /* Contact section glow: much bigger and stronger on phone & tablet */
+  .b-cta{width:150vw;height:150vw;top:calc(50% + 120px);--blob-blur:48px}
+}

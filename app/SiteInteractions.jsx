@@ -72,9 +72,33 @@ export default function SiteInteractions() {
         const cx=cr.left+cr.width/2-hr.left, cy=cr.top+cr.height/2-hr.top;
         blob.style.right='auto'; blob.style.bottom='auto';
         blob.style.left=(cx-blob.offsetWidth/2)+'px';
-        blob.style.top=(cy-blob.offsetHeight/2)+'px';
+        /* Keep the blob (and its blur) clear of the accent "solutions" word */
+        let top=cy-blob.offsetHeight/2;
+        const am=document.querySelector('.hero h1 .am');
+        if(am){
+          const blur=parseFloat(getComputedStyle(blob).filter.replace(/[^0-9.]/g,''))||0;
+          const minTop=am.getBoundingClientRect().bottom-hr.top+blur*0.9;
+          if(top<minTop) top=minTop;
+        }
+        blob.style.top=top+'px';
+      }
+      /* Phone & tablet: one half circle from the top that stops above the accent "solutions" word */
+      function topBlobAboveAccent(){
+        const blob=document.querySelector('.hero .b-1'), am=document.querySelector('.hero h1 .am'), hero=document.querySelector('.hero');
+        if(!blob||!am||!hero) return;
+        if(!window.matchMedia('(max-width:1024px)').matches){ blob.style.top=''; blob.style.height=''; return; }
+        const blur=parseFloat(getComputedStyle(blob).filter.replace(/[^0-9.]/g,''))||0;
+        const h1=am.closest('h1'), shift=h1?new DOMMatrix(getComputedStyle(h1).transform).m42:0; /* ignore the reveal slide-in */
+        const amTop=am.getBoundingClientRect().top-shift-hero.getBoundingClientRect().top;
+        blob.style.top=(-blur*2)+'px';
+        blob.style.height=Math.max(0, amTop - blur*0.6)+'px'; /* glow fully fades out above "solutions" */
       }
       centerBlobOnCta();
+      topBlobAboveAccent();
+      window.addEventListener('resize', topBlobAboveAccent);
+      window.addEventListener('load', topBlobAboveAccent);
+      document.fonts && document.fonts.ready.then(topBlobAboveAccent);
+      { const h=document.querySelector('.hero h1'); h && h.addEventListener('transitionend', topBlobAboveAccent); }
       window.addEventListener('resize', centerBlobOnCta);
       window.addEventListener('load', centerBlobOnCta);
       document.fonts && document.fonts.ready.then(centerBlobOnCta);
