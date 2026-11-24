@@ -154,12 +154,39 @@ export default function SiteInteractions() {
       document.querySelectorAll('[data-reveal]').forEach(el => io.observe(el));
     
       /* ---------- Smooth-anchor scroll ---------- */
+      // Page Y of an element as it sits once revealed (ignores the reveal slide-in offset).
+      const restingTop = (node) => {
+        const r = node.getBoundingClientRect();
+        let shift = 0;
+        for (let n = node; n && n !== document.body; n = n.parentElement){
+          const tf = getComputedStyle(n).transform;
+          if (tf && tf !== 'none') shift += new DOMMatrixReadOnly(tf).m42;
+        }
+        return { top: r.top + window.scrollY - shift, bottom: r.bottom + window.scrollY - shift };
+      };
+      const anchorTop = (el) => {
+        if (el.id === 'contact'){
+          // Land with "Need something?" and the attach/send buttons on screen together.
+          const head = el.querySelector('h2');
+          const end = el.querySelector('.form .submit') || el.querySelector('.form');
+          if (head && end){
+            const nav = document.querySelector('.nav');
+            const navH = nav ? nav.getBoundingClientRect().bottom : 0;
+            const pad = 16;
+            const top = restingTop(head).top;
+            const bottom = restingTop(end).bottom;
+            // Heading just under the nav, unless that would push the buttons off screen.
+            return Math.max(top - navH - pad, bottom - window.innerHeight + pad);
+          }
+        }
+        return el.getBoundingClientRect().top + window.scrollY - 30;
+      };
       document.querySelectorAll('a[href^="#"]').forEach(a=>{
         a.addEventListener('click', (e)=>{
           const id = a.getAttribute('href');
           if (id.length>1){
             const el = document.querySelector(id);
-            if (el){ e.preventDefault(); window.scrollTo({top: el.getBoundingClientRect().top + window.scrollY - 30, behavior:'smooth'}); }
+            if (el){ e.preventDefault(); window.scrollTo({top: anchorTop(el), behavior:'smooth'}); }
           }
         });
       });
