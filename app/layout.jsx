@@ -1,3 +1,4 @@
+import { Analytics } from '@vercel/analytics/next';
 import { Geist, DM_Mono } from 'next/font/google';
 import './globals.css';
 
@@ -16,6 +17,7 @@ export default function RootLayout({ children }) {
     <html lang="en" className={`${geist.variable} ${dmMono.variable}`}>
       <body data-cursor="dot" data-am="accent" data-heroblobs="both" className="dense">
         {children}
+        <Analytics />
       </body>
     </html>
   );
