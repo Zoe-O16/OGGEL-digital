@@ -80,7 +80,7 @@ export default function Page() {
       <footer>
         <div className="bot">
           <span>© 2026 OGGEL digital</span>
-          <span>KvK 84.XX.XX.XX</span>
+          <span>KvK 42098379</span>
           <span><span>Local time</span> · <span id="clock">—</span></span>
         </div>
       </footer>
